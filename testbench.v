@@ -1,15 +1,36 @@
-module testbench();
-reg [15:0] b;
-reg[3:0]s;
-wire out;
-mux16x1 test_16x1(b,s,out);
+module testbench;
+reg j,k,clk;
+wire q,qb;
+
 initial begin
-b=16'b0000000011111111;s=4'b0001;
-#100
-b=16'b0000000011111110;s=4'b0000;
-#100
-b=16'b1000001111110110;s=4'b0110;
-#100
-b=16'b0101010101010101;s=4'b1111;
+ clk=0;
+ forever #10 clk = ~clk;
+end
+flipflop jkff (j,k,clk,q,qb);
+initial begin
+ j <= 1;
+ k <= 0;
+ #20;
+ j <= 0;
+ k <= 0;
+ #20;
+ j <= 0;
+ k <= 1;
+ #20;
+ j <= 1;
+ k <= 0;
+ #20;
+ j <= 1;
+ k <= 1;
+ #20;
+ j <= 0;
+ k <= 0;
+ #20;
+ j <= 1;
+ k <= 0;
+ #20;
+ j <= 0;
+ k <= 1;
+ #20;
 end
 endmodule

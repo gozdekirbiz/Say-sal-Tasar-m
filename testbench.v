@@ -1,25 +1,39 @@
-module testbench();
-reg [3:0]d;
-reg Sin;
-reg clk,sl,op;
-wire q;
-register d1(Sin, d, op, sl, clk,q);
-initial
-begin
-clk=1'b0;
-forever #5 clk=~clk;
-end
-initial
-begin
-if(op)
-sl=0;
-else
-sl=1;
-d=4'b1011;
-#10 sl=1;
-#10 sl=1;
-#10 sl=1;
-#10 sl=0;d=4'b0000;
-#100 $finish;
-end 
+module test_bench2v();
+
+reg [7:0] in;
+reg [2:0] s;
+wire out;
+
+mux4x1 mux(in,s,out);
+initial begin
+	   
+		in = 8'b00010100; s=3'b000; #100 
+		in = 8'b00010100; s=3'b001; #100 
+		in = 8'b00010100; s=3'b010; #100 
+		in = 8'b00010100; s=3'b011; #100 
+		in = 8'b00010100; s=3'b100; #100 
+		in = 8'b00010100; s=3'b101; #100 
+		in = 8'b00010100; s=3'b110; #100 
+		in = 8'b00010100; s=3'b111; #100 
+		
+		in = 8'b10010111; s=3'b000; #100 
+		in = 8'b10010111; s=3'b001; #100 
+		in = 8'b10010111; s=3'b010; #100 
+		in = 8'b10010111; s=3'b011; #100 
+		in = 8'b10010111; s=3'b100; #100 
+		in = 8'b10010111; s=3'b101; #100 
+		in = 8'b10010111; s=3'b110; #100 
+		in = 8'b10010111; s=3'b111; #100 
+		
+		in = 8'b00101110; s=3'b000; #100 
+		in = 8'b00101110; s=3'b001; #100 
+		in = 8'b00101110; s=3'b010; #100 
+		in = 8'b00101110; s=3'b011; #100 
+		in = 8'b00101110; s=3'b100; #100 
+		in = 8'b00101110; s=3'b101; #100 
+		in = 8'b00101110; s=3'b110; #100 
+		in = 8'b00101110; s=3'b111; 
+		
+	end
+		
 endmodule

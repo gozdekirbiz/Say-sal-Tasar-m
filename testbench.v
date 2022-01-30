@@ -1,36 +1,25 @@
-module testbench;
-reg j,k,clk;
-wire q,qb;
-
-initial begin
- clk=0;
- forever #10 clk = ~clk;
+module testbench();
+reg [3:0]d;
+reg Sin;
+reg clk,sl,op;
+wire q;
+register d1(Sin, d, op, sl, clk,q);
+initial
+begin
+clk=1'b0;
+forever #5 clk=~clk;
 end
-flipflop jkff (j,k,clk,q,qb);
-initial begin
- j <= 1;
- k <= 0;
- #20;
- j <= 0;
- k <= 0;
- #20;
- j <= 0;
- k <= 1;
- #20;
- j <= 1;
- k <= 0;
- #20;
- j <= 1;
- k <= 1;
- #20;
- j <= 0;
- k <= 0;
- #20;
- j <= 1;
- k <= 0;
- #20;
- j <= 0;
- k <= 1;
- #20;
-end
+initial
+begin
+if(op)
+sl=0;
+else
+sl=1;
+d=4'b1011;
+#10 sl=1;
+#10 sl=1;
+#10 sl=1;
+#10 sl=0;d=4'b0000;
+#100 $finish;
+end 
 endmodule
